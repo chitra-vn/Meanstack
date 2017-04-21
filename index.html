@@ -1,0 +1,125 @@
+<!DOCTYPE>
+<html>
+    <head>
+     <meta charset="UTF-8">   
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <script src="controller/controller.js"></script>
+    <link href="controller/angular_xeditable/css/xeditable.css" rel="stylesheet">
+    <script src="controller/angular_xeditable/js/xeditable.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <style>
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+    </head>
+<body>
+    <div class="container" ng-app="myApp" ng-controller="AppCtrl" style="height:50%";>
+        <h1>Book</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>ISBN Code</th>
+                    <th>Publish Date</th>
+                    <th>Total Inventory</th>
+                    <th>Out in Circluation</th>
+                    <th>Action</th>
+                    <th>&nbsp;</th>
+                 </tr>
+            </thead>
+            <tbody>
+                
+                <tr ng-repeat="book in booklist.data">
+                   <!-- <td>{{book.bid}}</td>-->
+                    <td>
+                        <span editable-text="book.bookTitle" e-name="bookTitle" e-form="rowform">
+                        {{ book.bookTitle || 'empty' }}
+                    </span>
+                    </td>
+                    <td>
+                        <span editable-text="book.author" e-name="author" e-form="rowform">
+                        {{ book.author || 'empty' }}
+                    </span>
+                    </td>
+                    <td>
+                        <span editable-text="book.category" e-name="category" e-form="rowform">
+                        {{ book.category || 'empty' }}
+                    </span>
+                    </td>
+                    <td>
+                        <span editable-text="book.isbnCode" e-name="isbnCode" e-form="rowform">
+                        {{ book.isbnCode || 'empty' }}
+                    </span>
+                    </td>
+                    <td>
+                        <span editable-text="book.publishDate" e-name="publishDate" e-form="rowform">
+                        {{ book.publishDate || 'empty' }}
+                    </span>
+                    </td>
+                    <td>
+                        <span editable-text="book.totalInventory" e-name="totalInventory" e-form="rowform">
+                        {{ book.totalInventory || 'empty' }}
+                    </span>
+                    </td>
+                    <td>
+                        <span editable-text="book.outInCirculation" e-name="outInCirculation" e-form="rowform">
+                        {{ book.outInCirculation || 'empty' }}
+                    </span>
+                    </td>
+                   <!-- <td>{{book.author}}</td>
+                    <td>{{book.category}}</td>
+                    <td>{{book.isbnCode}}</td>
+                    <td>{{book.publishDate}}</td> -->
+                   <!-- <td>{{book.inStock}}</td>-->
+                   <!-- <td>{{book.totalInventory}}</td>
+                    <td>{{book.outInCirculation}}</td> -->
+                   <!--<td><button class="btn btn-danger" ng-click="delete(book._id)">DELETE</button></td>
+                 <td><button class="btn btn-warning" ng-click="edit(book._id)">EDIT</button></td> -->
+                   <td style="white-space: nowrap">
+        <!-- form -->
+        <form editable-form name="rowform" onbeforesave="updateBook($data,book._id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+            Save
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+            Cancel
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button type="button" class="btn btn-primary" ng-click="rowform.$show()">Edit</button>
+          <button type="button" class="btn btn-danger" ng-click="delete(book._id)">Delete</button>
+        </div>  
+      </td>                  
+                </tr>
+                 <tr>
+                   <!-- <td><input class="form-control" ng-model="book.bid"</td>-->
+                    <td><input class="form-control" type="text" ng-model="book.bookTitle" value="default"</td>
+                    <td><input class="form-control" ng-model="book.author"</td>
+                    <td><input class="form-control" ng-model="book.category"</td>
+                    <td><input class="form-control" ng-model="book.isbnCode"</td>
+                    <td><input class="form-control" ng-model="book.publishDate"</td>
+                   <!-- <td><input class="form-control" ng-model="book.inStock"</td>-->
+                    <td><input class="form-control" ng-model="book.totalInventory"</td>
+                    <td><input class="form-control" ng-model="book.outInCirculation"</td>
+                   <td><button class="btn btn-primary" ng-click="addBook()">ADD</button></td>
+                  <!-- <td><button class="btn btn-info" ng-click="updateBook()">UPDATE</button></td>-->
+                </tr>
+            </tbody>
+        </table>
+       <!-- <button class="btn btn-primary" id="add">ADD</button>-->
+    </div>
+</body>
+</html>
